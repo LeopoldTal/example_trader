@@ -23,15 +23,11 @@ class Agent:
 	
 	def kelly(self, price_history):
 		"""Get optimal fraction to invest in the asset according to the Kelly criterion"""
-		gains = np.diff(price_history)
-		wins = [ g for g in gains if g >= 0 ]
-		losses = [ -g for g in gains if g < 0 ]
-		if np.sum(wins) == 0:
-			return 0
-		if np.sum(losses) == 0:
-			return 1
+		price_history = np.array(price_history)
+		gains = price_history[1:] / price_history[:-1]
+		wins = [ g for g in gains if g >= 1 ]
 		p_win = len(wins) / len(gains)
-		win_ratio = np.sum(wins) / np.sum(losses)
+		win_ratio = np.product(gains)
 		return min(max(p_win - (1 - p_win)/win_ratio, 0), 1)
 	
 	def record_buy(self, buy_amount, price):
