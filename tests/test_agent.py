@@ -33,6 +33,6 @@ def test_records_buy():
 	agent = example_trader.agent.Agent()
 	agent.cash = 100
 	agent.asset = 50
-	agent.record(buy_amount = 42, price = 0.1)
+	agent.record_buy(buy_amount = 42, price = 0.1)
 	assert(agent.asset == 92)
 	assert(agent.cash == 95.8)
