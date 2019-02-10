@@ -11,7 +11,6 @@ class Client:
 		"""C.get_price()
 		
 		Get the current asset price"""
-		# TODO: maintain a session to keep the connection alive
 		price_req = self.session.get(self.url)
 		if price_req.status_code == 200:
 			return int(price_req.text)
