@@ -22,9 +22,10 @@ class TradingLoop:
 		print('Price %d / Buying %.1f / %s / Own %.1f' %
 			(current_price, buy_amount, self.agent, self.agent.get_worth(current_price)))
 		
+		# TODO: should probably use actual times instead of assuming uniform
 		self.price_history.append(current_price)
 	
 	def run(self):
 		while True:
 			self.step()
-			sleep(2) # TODO: how hard can we pound on the API?
+			sleep(0.5) # TODO: how hard can we pound on the API?
