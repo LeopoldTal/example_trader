@@ -36,3 +36,9 @@ def test_records_buy():
 	agent.record_buy(buy_amount = 42, price = 0.1)
 	assert(agent.asset == 92)
 	assert(agent.cash == 95.8)
+
+def test_str():
+	agent = example_trader.agent.Agent()
+	agent.cash = 2.71
+	agent.asset = 42
+	assert(str(agent) == 'Cash 2.710 / Asset 42.000')

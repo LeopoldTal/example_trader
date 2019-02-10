@@ -35,3 +35,6 @@ class Agent:
 		Record a purchase or sale of the asset at the given unit price"""
 		self.asset += buy_amount
 		self.cash -= buy_amount * price
+	
+	def __str__(self):
+		return 'Cash %.3f / Asset %.3f' % (self.cash, self.asset)
