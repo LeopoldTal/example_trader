@@ -21,4 +21,4 @@ class Client:
 		"""C.buy(buy_amount)
 		
 		Buy (or sell if negative) the asset"""
-		print('%s %f' % (buy_amount < 0 and 'Selling' or 'Buying', buy_amount))
+		#print('%s %f' % (buy_amount < 0 and 'Selling' or 'Buying', buy_amount))

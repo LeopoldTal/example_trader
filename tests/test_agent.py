@@ -42,3 +42,9 @@ def test_str():
 	agent.cash = 2.71
 	agent.asset = 42
 	assert(str(agent) == 'Cash 2.710 / Asset 42.000')
+
+def test_gets_worth():
+	agent = example_trader.agent.Agent()
+	agent.cash = 5
+	agent.asset = 10
+	assert(agent.get_worth(20) == 205)

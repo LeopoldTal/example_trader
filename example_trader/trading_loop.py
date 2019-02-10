@@ -18,6 +18,10 @@ class TradingLoop:
 		# TODO: handle buy order failure, if that was possible
 		self.agent.record_buy(buy_amount, current_price)
 		
+		# TODO: `print` does not count as proper logging and monitoring
+		print('Price %d / Buying %.1f / %s / Own %.1f' %
+			(current_price, buy_amount, self.agent, self.agent.get_worth(current_price)))
+		
 		self.price_history.append(current_price)
 	
 	def run(self):

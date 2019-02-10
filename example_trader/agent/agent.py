@@ -12,7 +12,6 @@ class Agent:
 	Get amount of the asset the agent wants to buy.
 	Negative for selling, 0 for holding"""
 	def get_buy_amount(self, price_history, current_price):
-		print(price_history)
 		if len(price_history) == 0:
 			return 0
 		
@@ -38,3 +37,9 @@ class Agent:
 	
 	def __str__(self):
 		return 'Cash %.3f / Asset %.3f' % (self.cash, self.asset)
+	
+	def get_worth(self, current_price):
+		"""A.get_worth(current_price)
+		
+		Gets total worth of agent's holdings given a price for the asset"""
+		return self.cash + current_price * self.asset
