@@ -12,21 +12,27 @@ class Agent:
 	Get amount of the asset the agent wants to buy.
 	Negative for selling, 0 for holding"""
 	def get_buy_amount(self, price_history, current_price):
-		if len(price_history) == 0:
+		# collect some history before doing anything
+		if len(price_history) < 10:
 			return 0
 		
-		# TODO: try diffs, there might be inertia in the market
-		mean_price = np.mean(price_history)
-		if current_price < mean_price: # TODO: what's a bid-ask spread, precious?
-			if current_price <= self.cash:
-				return 1 # TODO: pick some sensible amount; Kelly?
-			else: # TODO: buy partial asset?
-				return 0
-		else:
-			if self.asset >= 1:
-				return -1
-			else:
-				return 0
+		print('DEBUG: %.1f%% of my holdings should be in the asset'
+			% (100 * self.kelly(price_history),))
+		f_target = self.kelly(price_history)
+		return (self.asset + self.cash/current_price) * f_target - self.asset
+	
+	def kelly(self, price_history):
+		"""Get optimal fraction to invest in the asset according to the Kelly criterion"""
+		gains = np.diff(price_history)
+		wins = [ g for g in gains if g >= 0 ]
+		losses = [ -g for g in gains if g < 0 ]
+		if np.sum(wins) == 0:
+			return 0
+		if np.sum(losses) == 0:
+			return 1
+		p_win = len(wins) / len(gains)
+		win_ratio = np.sum(wins) / np.sum(losses)
+		return min(max(p_win - (1 - p_win)/win_ratio, 0), 1)
 	
 	def record_buy(self, buy_amount, price):
 		"""A.record(buy_amount, price)
@@ -43,3 +49,4 @@ class Agent:
 		
 		Gets total worth of agent's holdings given a price for the asset"""
 		return self.cash + current_price * self.asset
+
