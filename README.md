@@ -1,6 +1,6 @@
 # Example trader
 
-An example trading agent for David Knott.
+An example trading agent.
 
 ## Usage
 
@@ -28,4 +28,3 @@ Dev dependencies:
 * pytest
 
 Run tests with `py.test`.
-

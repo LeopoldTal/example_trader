@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-from . import client
-from . import agent
-from . import trading_loop
+import client.client
+import agent.agent
+import trading_loop
 
 API_URL = 'https://price-stream-api.herokuapp.com/'
 
